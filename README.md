@@ -8,7 +8,7 @@ Shortcuts and other settings could be changed through the options panel.
 
 #### Installation
 
-- Via [Chrome Web Store](@todo)
+- Via [Chrome Web Store](https://chrome.google.com/webstore/detail/laravelyii-2-docs-search/feleaddkmjemddinednloockahgcpaif)
 
 - Manually:
   1. Download and extract the project archive.
