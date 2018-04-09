@@ -1,0 +1,302 @@
+%block {
+    position: relative;
+    display: block;
+    width: 100%;
+    left: 0;
+    top: 0;
+    text-align: left;
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    background: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+}
+
+%inline {
+    display: inline;
+    color: inherit;
+    font-family: inherit;
+    font-style: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    box-shadow: none;
+}
+
+%base-bar {
+    all: unset;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    z-index: 1;
+    margin: 0 auto;
+    padding: 0;
+    left: 0;
+    top: 0;
+    clear: both;
+    height: auto;
+    height: auto;
+    max-width: 100%;
+    width: $searchBarWidth;
+    border-radius: $baseRadius;
+    color: $txtColor;
+    line-height: $baseLineHeight;
+    font-size: $baseFontSize;
+    font-family: $baseFont;
+    box-sizing: border-box;
+    user-select: none;
+    background: #fff;
+    box-shadow: none;
+    border: 1px solid $greyColor;
+    * {
+        all: unset;
+    }
+    *, *:before, *:after {
+        box-sizing: inherit;
+    }
+}
+
+@mixin searchBar($mainColor) {
+    $hPadding: 20px;
+    a {
+        color: $mainColor;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+    // Search form controls (input/select)
+    %input {
+        $vPadding: 10px;
+        @extend %block;
+        outline: 0;
+        margin: 0;
+        background: #fff;
+        border: 1px solid $greyColor;
+        height: $searchInputHeight;
+        line-height: $searchInputHeight - (2*$vPadding);
+        padding: $vPadding $hPadding;
+        color: $mainColor;
+        border-radius: $baseRadius;
+        transition: color 0.2s;
+    }
+    .#{$ns}-search-input {
+        @extend %input;
+    }
+    .#{$ns}-search-select {
+        @extend %input;
+        width: auto;
+        min-width: 100px;
+        padding-left: 15px;
+        padding-right: 5px;
+        font-weight: bold;
+        background: $greyColor;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        transition: none;
+        -webkit-appearance: none;
+        &:before {
+            content: "2";
+            position: absolute;
+            display: block;
+        }
+        option {
+            background: #fff;
+            color: $txtColor;
+        }
+    }
+    .#{$ns}-search-select-wrapper {
+        @extend %block;
+        width: auto;
+        &:after { // fake select arrow
+            $size: 15px;
+            color: $mainColor;
+            content: "\25BC";
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            font-size: 12px;
+            margin-top: -($size / 2);
+            line-height: $size;
+            width: $size;
+            height: $size;
+        }
+    }
+    .#{$ns}-search-controls-wrapper {
+        @extend %block;
+        z-index: 1;
+        display: flex;
+        .#{$ns}-search-select-wrapper {
+            flex-grow: 0;
+            flex-shrink: 0;
+        }
+        .#{$ns}-search-input {
+            border-left: 0;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    }
+
+    // Search results
+    .#{$ns}-search-results {
+        @extend %block;
+        z-index: 2;
+        border: 1px solid $greyColor;
+        border-top-width: 2px;
+        margin-top: -1px;
+        border-bottom-left-radius: $baseRadius;
+        border-bottom-right-radius: $baseRadius;
+        max-height: 670px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        display: none;
+        @media screen and (max-height: 790px) {
+            max-height: 500px;
+        }
+        @media screen and (max-height: 650px) {
+            max-height: 400px;
+        }
+        @media screen and (max-height: 500px) {
+            max-height: 230px;
+        }
+        @media screen and (max-height: 340px) {
+            max-height: 100px;
+        }
+        &.#{$ns}-search-results-active {
+            display: block;
+        }
+        // custom scroll
+        &::-webkit-scrollbar {
+            width: 5px;
+        }
+        &::-webkit-scrollbar-track {
+            background: $greyColor;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: $mainColor;
+            &:hover {
+                background: darken($mainColor, 5%);
+            }
+            &:active {
+                background: darken($mainColor, 10%);
+            }
+        }
+    }
+    .#{$ns}-search-result-accent {
+        @extend %inline;
+        color: $mainColor;
+    }
+    .#{$ns}-search-result-title {
+        @extend %block;
+        font-weight: bold;
+        font-size: $baseFontSize + 2;
+    }
+    .#{$ns}-search-result-item-sub-section {
+        @extend %block;
+        color: $lightTxtColor;
+        font-size: $baseFontSize + 1;
+        margin: 10px 0;
+        & > div {
+            display: inline-block;
+            vertical-align: top;
+        }
+    }
+    .#{$ns}-search-result-item-content {
+        @extend %block;
+        margin: 10px 0;
+        padding: 5px;
+        color: $lightTxtColor;
+        background: $lightGreyColor;
+        border-radius: $baseRadius;
+    }
+    .#{$ns}-search-result-item {
+        @extend %block;
+        padding: 15px $hPadding;
+        border-bottom: 1px solid $greyColor;
+        cursor: pointer;
+        text-decoration: none;
+        em {
+            @extend %inline;
+            border-radius: $baseRadius;
+            background: rgba($mainColor, 0.2);
+        }
+        &:last-child {
+            border-bottom: 0;
+        }
+        & > div:last-child {
+            margin-bottom: 0;
+        }
+        &.#{$ns}-search-result-item-active {
+            background: $lightGreyColor;
+            .#{$ns}-search-result-match {
+                background: rgba($mainColor, 0.4);
+            }
+            .#{$ns}-search-result-item-content {
+                background: $greyColor;
+            }
+        }
+        &:focus {
+            outline: 0;
+        }
+        &:active {
+            background: rgba($mainColor, 0.1);
+        }
+    }
+    .#{$ns}-search-results-missing {
+        @extend %block;
+        padding: 15px $hPadding;
+        font-weight: bold;
+    }
+}
+
+html > body .#{$ns}-search-bar-wrapper {
+    @extend %block;
+    all: unset;
+    position: fixed;
+    z-index: 999999;
+    left: 0;
+    top: 0;
+    padding: 70px 0 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: none;
+    .dsa-search-bar-overlay {
+        all: unset;
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(#000, 0.4);
+    }
+    .#{$ns}-search-bar-laravel {
+        @extend %base-bar;
+        @include searchBar($laravelColor);
+    }
+
+    .#{$ns}-search-bar-yii {
+        @extend %base-bar;
+        @include searchBar($yiiColor);
+    }
+    &.#{$ns}-search-bar-wrapper-active {
+        display: block;
+        animation: fade-in 0.2s;
+        %base-bar {
+            animation: translate-entrance 0.2s;
+        }
+    }
+    &.#{$ns}-search-bar-wrapper-closing {
+        animation: fade-out 0.2s forwards;
+        %base-bar {
+            animation: translate-exit 0.2s forwards;
+        }
+    }
+    @media screen and (max-height: 600px) {
+        padding-top: 50px;
+    }
+    @media print {
+        display: none !important;
+    }
+}

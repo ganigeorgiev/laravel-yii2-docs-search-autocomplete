@@ -1,0 +1,11 @@
+{
+    "output": {
+        "dir":       "css",
+        "structure": "flat"
+    },
+    "compile": {
+        "line-comments": false,
+        "line-numbers":  false,
+        "style":         "compressed"
+    }
+}

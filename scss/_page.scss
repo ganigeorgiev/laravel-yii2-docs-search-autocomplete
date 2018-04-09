@@ -1,0 +1,130 @@
+body {
+    min-width: 400px;
+    color: $txtColor;
+    font-size: $baseFontSize;
+    line-height: $baseLineHeight;
+    font-family: $baseFont;
+    background: $lightGreyColor;
+}
+a {
+    color: inherit;
+    text-decoration: underline;
+    &:hover {
+        text-decoration: none;
+    }
+}
+p {
+    margin: 10px 0;
+}
+input, select, textarea {
+    display: block;
+    width: 100%;
+    background: #fff;
+    outline: 0;
+    border-radius: $baseRadius;
+    border: 1px solid $greyColor;
+    padding: 10px 10px;
+}
+label {
+    display: block;
+    width: 100%;
+    margin: 0 0 5px;
+}
+em {
+    font-weight: normal;
+    font-style: italic;
+}
+strong {
+    font-weight: bold;
+}
+code {
+    display: inline;
+    background: $lightGreyColor;
+    padding: 1px 2px;
+    border-radius: $baseRadius;
+}
+hr {
+    border: 0;
+    height: 1px;
+    margin: 10px 0;
+    background: $greyColor;
+}
+.laravel-color {
+    color: $laravelColor;
+}
+.yii-color {
+    color: $yiiColor;
+}
+.block {
+    display: block;
+    width: 100%;
+    clear: both;
+}
+.spacing {
+    @extend .block;
+    margin: 0 0 $baseSpacing;
+}
+.wrapper {
+    @extend .block;
+    padding: $baseSpacing;
+    position: relative;
+}
+.hidden {
+    display: none !important;
+}
+.alert {
+    @extend .block;
+    padding: 5px 10px;
+    color: #fff;
+    background: $primaryColor;
+    border-radius: $baseRadius;
+    margin: 0 0 $baseSpacing;
+}
+.title {
+    @extend .block;
+    text-align: center;
+    font-weight: bold;
+    background: #fff;
+    font-size: $baseFontSize;
+    padding: $baseSpacing;
+    margin: 0;
+}
+.btn {
+    display: inline-block;
+    vertical-align: top;
+    outline: 0;
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-family: inherit;
+    border-radius: $baseRadius;
+    background: $darkGreyColor;
+    line-height: $baseLineHeight;
+    font-size: $baseFontSize;
+    font-weight: bold;
+    padding: 8px $baseSpacing;
+    &:hover {
+        background: lighten($darkGreyColor, 10%);
+    }
+    &:active {
+        background: lighten($darkGreyColor, 5%);
+    }
+}
+.form-group {
+    @extend .block;
+    margin: 0 0 $baseSpacing;
+}
+.settings-group {
+    @extend .block;
+    margin: 0 0 $baseSpacing;
+}
+.credits {
+    @extend .block;
+    text-align: center;
+    padding-top: 10px;
+    border-top: 1px solid $greyColor;
+    font-size: $baseFontSize - 2;
+    color: $lightTxtColor;
+}

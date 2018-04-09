@@ -1,0 +1,27 @@
+// paths
+$imagesPath: '../images';
+
+// fonts
+$baseFont:  Arial, Helvetica, sans-serif;
+
+// colors
+$laravelColor:   #f4645f;
+$yiiColor:       #398ff7;
+$primaryColor:   #398ff7;
+$txtColor:       #505050;
+$lightTxtColor:  lighten($txtColor, 20%);
+$greyColor:      #dee0df;
+$darkGreyColor:  #7f7f7f;
+$lightGreyColor: #f2f2f2;
+$overlayColor:   rgba(0,0,0, 0.4);
+
+// sizes
+$baseLineHeight:    22px;
+$baseFontSize:      14px;
+$baseRadius:        3px;
+$baseSpacing:       20px;
+$searchBarWidth:    800px;
+$searchInputHeight: 50px;
+
+// namespace
+$ns: 'dsa';
