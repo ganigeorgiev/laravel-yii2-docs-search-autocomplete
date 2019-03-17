@@ -82,8 +82,10 @@
     function loadOptionsFromStorage() {
         if (chrome && chrome.storage && chrome.storage.sync) {
             chrome.storage.sync.get([
-                'yiiShortcut', 'yiiDocsVersion',
-                'laravelShortcut', 'laravelDocsVersion'
+                'yiiShortcut',
+                'yiiDocsVersion',
+                'laravelShortcut',
+                'laravelDocsVersion'
             ], function (props) {
                 updateOptions(props);
             });

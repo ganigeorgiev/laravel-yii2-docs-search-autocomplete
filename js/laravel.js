@@ -11,7 +11,7 @@ class DSA_Laravel extends DSA_Base {
         settings.inputId     = settings.inputId     || 'dsa_laravel_search_input';
         settings.searchUrl   = settings.searchUrl   || 'https://8bb87i11de-dsn.algolia.net/1/indexes/docs/query?x-algolia-api-key=8e1d446d61fce359f69cd7c8b86a50de&x-algolia-application-id=8BB87I11DE&x-algolia-agent=Algolia%20for%20vanilla%20JavaScript%203.7.7';
         settings.baseDocsUrl = settings.baseDocsUrl || 'https://laravel.com/docs';
-        settings.docsVersion = settings.docsVersion || '5.6';
+        settings.docsVersion = settings.docsVersion || '5.8';
 
         super(settings);
     }

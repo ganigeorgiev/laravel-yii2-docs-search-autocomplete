@@ -8,7 +8,7 @@
     var defaultOptions = {
         yiiShortcut:        '1',
         laravelShortcut:    '1',
-        laravelDocsVersion: '5.6'
+        laravelDocsVersion: '5.8'
     };
 
     // common selectors
@@ -66,7 +66,7 @@
             'laravelShortcut',
             'laravelDocsVersion'
         ], function (props) {
-            var data = Object.assign({}, defaultOptions, props || {})
+            var data = Object.assign({}, defaultOptions, props || {});
 
             yiiShortcutSelect.value        = data.yiiShortcut;
             laravelShortcutSelect.value    = data.laravelShortcut;
