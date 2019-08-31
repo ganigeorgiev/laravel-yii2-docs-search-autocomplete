@@ -17,7 +17,7 @@
         yiiShortcut:        '1',
         yiiDocsVersion:     '2.0',
         laravelShortcut:    '1',
-        laravelDocsVersion: '5.6'
+        laravelDocsVersion: 'master'
     };
 
     var closeTimeoutId = null;
@@ -85,7 +85,7 @@
                 'yiiShortcut',
                 'yiiDocsVersion',
                 'laravelShortcut',
-                'laravelDocsVersion'
+                'laravelDocsVersion',
             ], function (props) {
                 updateOptions(props);
             });

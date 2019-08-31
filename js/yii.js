@@ -21,8 +21,7 @@ class DSA_Yii extends DSA_Base {
      * @inheritdoc
      */
     search(searchQuery) {
-        var data = DSA_YII_JSSEARCH.search(searchQuery);
-
+        var data        = DSA_YII_JSSEARCH.search(searchQuery);
         var resultItems = this.getResultItemsHtml(data);
 
         if (resultItems) {

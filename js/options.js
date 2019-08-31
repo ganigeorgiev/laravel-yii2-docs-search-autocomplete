@@ -8,7 +8,7 @@
     var defaultOptions = {
         yiiShortcut:        '1',
         laravelShortcut:    '1',
-        laravelDocsVersion: '5.8'
+        laravelDocsVersion: 'master'
     };
 
     // common selectors

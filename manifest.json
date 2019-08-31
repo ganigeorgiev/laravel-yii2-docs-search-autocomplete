@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Laravel/Yii 2 Docs Search Autocomplete",
     "description": "Popup search box that enables you to navigate within the Yii 2 and Laravel Docs from every site.",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "author": "Gani Georgiev",
     "browser_action": {
         "default_icon":  "images/icon16.png",
