@@ -9,8 +9,7 @@ class DSA_Laravel extends DSA_Base {
      */
     constructor(settings = {}) {
         settings.inputId     = settings.inputId     || 'dsa_laravel_search_input';
-        settings.searchUrl   = settings.searchUrl   || 'https://8bb87i11de-dsn.algolia.net/1/indexes/docs/query?x-algolia-api-key=60b61cc4ab41ce7967bd36b002e9ea74&x-algolia-application-id=8BB87I11DE&x-algolia-agent=Algolia%20for%20vanilla%20JavaScript%203.7.7';
-        settings.baseDocsUrl = settings.baseDocsUrl || 'https://laravel.com/docs';
+        settings.searchUrl   = settings.searchUrl   || 'https://bh4d9od16a-dsn.algolia.net/1/indexes/laravel/query?x-algolia-agent=Algolia%20for%20JavaScript%20(4.6.0)%3B%20Browser%20(lite)&x-algolia-api-key=7dc4fe97e150304d1bf34f5043f178c4&x-algolia-application-id=BH4D9OD16A';
         settings.docsVersion = settings.docsVersion || 'master';
 
         super(settings);
@@ -20,22 +19,13 @@ class DSA_Laravel extends DSA_Base {
      * @inheritdoc
      */
     search(searchQuery) {
-        var searchData = '{"params":"query='+ encodeURIComponent(searchQuery) + '&hitsPerPage=5&tagFilters=%5B%22' + this.docsVersion + '%22%5D"}';
+        let searchData = {
+            'query': encodeURIComponent(searchQuery),
+            'hitsPerPage': 5,
+            'facetFilters': ['version:' + this.docsVersion]
+        };
 
-        this.sendPost(this.searchUrl, searchData);
-    }
-
-    /**
-     * Resolves single result item's link.
-     *
-     * @param  {String} path
-     * @return {String}
-     */
-    getLink(path = '') {
-        var normalizedBaseUrl = this.baseDocsUrl.endsWith('/') ? this.baseDocsUrl.slice(0, -1) : this.baseDocsUrl;
-        var normalizedPath    = path.startsWith('/') ? path.slice(0, -1) : path;
-
-        return normalizedBaseUrl + '/' + this.docsVersion + '/' + normalizedPath;
+        this.sendPost(this.searchUrl, JSON.stringify(searchData));
     }
 
     /**
@@ -56,33 +46,34 @@ class DSA_Laravel extends DSA_Base {
         var resultItems = '';
 
         for (let i in data.hits) {
-            let link     = data.hits[i].link;
-            let itemData = data.hits[i]._highlightResult;
+            let url       = data.hits[i].url;
+            let content   = data.hits[i]._highlightResult?.content;
+            let matchData = data.hits[i]._highlightResult?.hierarchy_camel?.[0] || data.hits[i]._highlightResult?.hierarchy;
 
-            if (!itemData) {
+            if (!matchData) {
                 continue;
             }
 
-            resultItems += '<a href="' + self.getLink(link) + '" class="' + self.resultsItemClass + '" target="_blank">';
+            resultItems += '<a href="' + url + '" class="' + self.resultsItemClass + '" target="_blank">';
 
-            if (itemData.h1) {
-                resultItems += '<div class="dsa-search-result-title">' + itemData.h1.value + '</div>';
+            if (matchData.lvl0) {
+                resultItems += '<div class="dsa-search-result-title">' + matchData.lvl0.value + '</div>';
             }
 
             resultItems += '<div class="dsa-search-result-item-sub-section">';
-            if (itemData.h2) {
-                resultItems += '<div class="dsa-search-result-h2"><span class="dsa-search-result-accent">#</span>&nbsp;' + itemData.h2.value + '</div>';
+            if (matchData.lvl1) {
+                resultItems += '<div class="dsa-search-result-h2"><span class="dsa-search-result-accent">#</span>&nbsp;' + matchData.lvl1.value + '</div>';
             }
-            if (itemData.h3) {
-                resultItems += '<div class="dsa-search-result-h2">&nbsp;&gt;&nbsp;' + itemData.h3.value + '</div>';
+            if (matchData.lvl2) {
+                resultItems += '<div class="dsa-search-result-h2">&nbsp;&gt;&nbsp;' + matchData.lvl2.value + '</div>';
             }
-            if (itemData.h4) {
-                resultItems += '<div class="dsa-search-result-h2">&nbsp;&gt;&nbsp;' + itemData.h4.value + '</div>';
+            if (matchData.lvl3) {
+                resultItems += '<div class="dsa-search-result-h2">&nbsp;&gt;&nbsp;' + matchData.lvl3.value + '</div>';
             }
             resultItems += '</div>';
 
-            if (itemData.content) {
-                resultItems += '<div class="dsa-search-result-item-content">' + itemData.content.value + '</div>';
+            if (content) {
+                resultItems += '<div class="dsa-search-result-item-content">' + content.value + '</div>';
             }
 
             resultItems += '</a>';

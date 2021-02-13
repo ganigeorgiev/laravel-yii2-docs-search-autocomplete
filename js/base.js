@@ -192,6 +192,11 @@ class DSA_Base {
      */
     showResultsContainer() {
         this._resultsContainer.classList.add(this.resultsContainerActiveClass);
+
+        // highlight the first available result
+        if (!document.getElementsByClassName(this.resultsItemActiveClass)?.length) {
+            this.highlightResult('next');
+        }
     }
 
     /**

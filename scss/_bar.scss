@@ -215,7 +215,8 @@
         border-bottom: 1px solid $greyColor;
         cursor: pointer;
         text-decoration: none;
-        em {
+        em,
+        .algolia-docsearch-suggestion--highlight {
             @extend %inline;
             border-radius: $baseRadius;
             background: rgba($mainColor, 0.2);
